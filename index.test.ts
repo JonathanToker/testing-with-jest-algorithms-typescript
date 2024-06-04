@@ -1,5 +1,5 @@
 import { expect, jest, test, describe } from "@jest/globals";
-import { removeOddsFromArray } from "./app";
+import { removeOddsFromArray, arrayPlusIndexValues } from "./app";
 describe("#removeOddsFromArray", () => {
   describe("no odd numbers", () => {
     test("returns the array as it is", () => {
@@ -30,6 +30,33 @@ describe("#removeOddsFromArray", () => {
       const numArrayNoOdds = removeOddsFromArray(numArray);
       expect(numArrayNoOdds.length).toBe(3);
       expect(numArrayNoOdds[0]).toBe(2);
+    });
+  });
+});
+
+describe("#arrayPlusIndexValues", () => {
+  describe("zero elements", () => {
+    test("returns an empty array", () => {
+      expect(arrayPlusIndexValues([])).toStrictEqual([]);
+    });
+  });
+
+  describe("1 element", () => {
+    test("returns the array as it is", () => {
+      const arrWithOneItem = arrayPlusIndexValues([1]);
+      expect(arrWithOneItem).toStrictEqual([1]);
+      expect(arrWithOneItem.length).toBe(1);
+    });
+  });
+
+  describe("with a few elements", () => {
+    test("return the array plus index values", () => {
+      const arr = [1, 2, 3, 4, 5];
+      //output should be [1, 3, 5, 7, 9]
+      const plusIndexValues = arrayPlusIndexValues(arr);
+      expect(plusIndexValues).toStrictEqual([1, 3, 5, 7, 9]);
+      expect(plusIndexValues.length).toBe(5);
+      expect(plusIndexValues[0]).toBe(arr[0]);
     });
   });
 });

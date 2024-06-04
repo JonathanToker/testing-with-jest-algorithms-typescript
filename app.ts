@@ -1,12 +1,10 @@
+//return an array excluding odd numbers
 export const removeOddsFromArray = (numArr: number[]) => {
-  const filteredArr = numArr.filter((element) => {
-    //return true or false whether we want to include that or not
-    if (element % 2 === 1) return false;
-    return true;
-  });
+  const filteredArr = numArr.filter((element) => element % 2 === 0);
   return filteredArr;
 };
-
-const numArrayNoOdds = removeOddsFromArray([]);
-console.log(numArrayNoOdds);
-console.log(numArrayNoOdds.length);
+//Return an array of its values plus the value's index
+export const arrayPlusIndexValues = (numArray: number[]) => {
+  const arrPlusIndexValues = numArray.map((item, index) => item + index);
+  return arrPlusIndexValues;
+};
