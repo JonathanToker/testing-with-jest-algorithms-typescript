@@ -40,4 +40,14 @@ export const shuffleNumArr = (numArray: number[]) => {
   return numArray;
 };
 
-console.log(shuffleNumArr([1, 2, 3, 4, 5]));
+export const twoSum = (nums: number[], target: number) => {
+  const complementsMap = new Map<number, number>();
+  for (let i = 0; i < nums.length; i++) {
+    const complement = target - nums[i];
+    if (complementsMap.has(complement)) {
+      return [complementsMap.get(complement), i];
+    }
+    complementsMap.set(nums[i], i);
+  }
+};
+console.log(twoSum([1, 2, 3, 4, 5], 8));
