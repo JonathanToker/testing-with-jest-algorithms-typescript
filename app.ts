@@ -121,21 +121,17 @@ export const findMaxAverage = (nums: number[], k: number) => {
   for (let i = 0; i < k; i++) {
     maxAvg += nums[i];
   }
-  maxAvg /= k;
-  let tracker = 0;
-  for (let i = k; tracker < nums.length - k + 1; i++) {
-    //find some of next four elements
-    let currentMax = 0;
-    for (let j = i - k + 1; j <= k; j++) {
-      currentMax += nums[j];
-    }
-    const currentMaxAvg = currentMax / k;
+  maxAvg = maxAvg;
+  let i = 0;
+  let currentMaxAvg = maxAvg;
+  while (i < nums.length - k + 1) {
+    currentMaxAvg = currentMaxAvg + nums[i + k] - nums[i];
     if (currentMaxAvg > maxAvg) maxAvg = currentMaxAvg;
-    tracker++;
+    i++;
   }
-  return maxAvg;
+  return maxAvg / k;
 };
-findMaxAverage([1, 12, -5, -6, 50, 3], 4);
+console.log(findMaxAverage([1, 12, -5, -6, 50, 3], 4));
 // [1, 2, 3, 4, 5, 6, 7] arr.length = 7, 7 - k + 1 = 3
 // k = 3
 // [1, 2, 3]

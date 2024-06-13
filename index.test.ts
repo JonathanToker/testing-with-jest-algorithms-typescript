@@ -72,4 +72,10 @@ describe("#findMaxAverage", () => {
       expect(firstTest).toBe(12.75);
     });
   });
+  describe("k is 1, return highest number", () => {
+    test("return maximum number", () => {
+      const secondTest = findMaxAverage([5], 1);
+      expect(secondTest).toBe(5);
+    });
+  });
 });
