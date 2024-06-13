@@ -1,5 +1,9 @@
 import { expect, jest, test, describe } from "@jest/globals";
-import { removeOddsFromArray, arrayPlusIndexValues } from "./app";
+import {
+  removeOddsFromArray,
+  arrayPlusIndexValues,
+  findMaxAverage,
+} from "./app";
 describe("#removeOddsFromArray", () => {
   describe("no odd numbers", () => {
     test("returns the array as it is", () => {
@@ -57,6 +61,15 @@ describe("#arrayPlusIndexValues", () => {
       expect(plusIndexValues).toStrictEqual([1, 3, 5, 7, 9]);
       expect(plusIndexValues.length).toBe(5);
       expect(plusIndexValues[0]).toBe(arr[0]);
+    });
+  });
+});
+
+describe("#findMaxAverage", () => {
+  describe("In the middle", () => {
+    test("Maximum average is 12.75", () => {
+      const firstTest = findMaxAverage([1, 12, -5, -6, 50, 3], 4);
+      expect(firstTest).toBe(12.75);
     });
   });
 });
