@@ -206,8 +206,36 @@ export const isAnagram = (s: string, t: string) => {
     if (sIndex < 0) {
       return false;
     }
-
     remainingLetters.splice(sIndex, 1);
   }
   return remainingLetters.length === 0;
+};
+
+//time complexity: O(nlgn) space complexity: O(n)
+export const isEfficientAnagram = (s: string, t: string): boolean => {
+  return s.split("").sort().join("") === t.split("").sort().join("");
+};
+//Time complexity: O(n)
+//Space complexity: O(n)
+export const mostEfficientIsAnagram = (s: string, t: string): boolean => {
+  if (s.length !== t.length) return false;
+  if (s.length === 0 || t.length === 0) return false;
+
+  const sCharCountMap = new Map<string, number>(); //char: count of the char
+  for (let char of s) {
+    const charCount = sCharCountMap.get(char);
+    const newCharCount = charCount ? charCount + 1 : 1;
+    sCharCountMap.set(char, newCharCount);
+  }
+  for (let char of t) {
+    const frequencyOfChar = sCharCountMap.get(char);
+    if (!frequencyOfChar) return false;
+    else if (frequencyOfChar === 1) {
+      sCharCountMap.delete(char);
+    } else {
+      const newCharCount = frequencyOfChar - 1;
+      sCharCountMap.set(char, newCharCount);
+    }
+  }
+  return sCharCountMap.size === 0;
 };

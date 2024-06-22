@@ -5,6 +5,7 @@ import {
   findMaxAverage,
   maxProfit,
   isAnagram,
+  isEfficientAnagram,
 } from "./app";
 describe("#removeOddsFromArray", () => {
   describe("no odd numbers", () => {
@@ -104,6 +105,18 @@ describe("#isAnagram", () => {
   describe("is not an anagram", () => {
     test("should return false", () => {
       expect(isAnagram("hello", "ol")).toBe(false);
+    });
+  });
+});
+describe("#isEfficientAnagram", () => {
+  describe("is an anagram", () => {
+    test("should return true", () => {
+      expect(isEfficientAnagram("hello", "olleh")).toBe(true);
+    });
+  });
+  describe("is not an anagram", () => {
+    test("should return false", () => {
+      expect(isEfficientAnagram("hello", "he")).toBe(false);
     });
   });
 });
