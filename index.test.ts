@@ -3,6 +3,8 @@ import {
   removeOddsFromArray,
   arrayPlusIndexValues,
   findMaxAverage,
+  maxProfit,
+  isAnagram,
 } from "./app";
 describe("#removeOddsFromArray", () => {
   describe("no odd numbers", () => {
@@ -76,6 +78,32 @@ describe("#findMaxAverage", () => {
     test("return maximum number", () => {
       const secondTest = findMaxAverage([5], 1);
       expect(secondTest).toBe(5);
+    });
+  });
+});
+
+describe("#maxProfits", () => {
+  describe("no profits", () => {
+    test("returns 0", () => {
+      expect(maxProfit([7, 6, 4, 3, 1])).toBe(0);
+    });
+  });
+  describe("in the middle, leetcode first test", () => {
+    test("returns 5", () => {
+      expect(maxProfit([7, 1, 5, 3, 6, 4])).toBe(5);
+    });
+  });
+});
+
+describe("#isAnagram", () => {
+  describe("is an anagram", () => {
+    test("should return true", () => {
+      expect(isAnagram("hello", "olleh")).toBe(true);
+    });
+  });
+  describe("is not an anagram", () => {
+    test("should return false", () => {
+      expect(isAnagram("hello", "ol")).toBe(false);
     });
   });
 });

@@ -131,7 +131,83 @@ export const findMaxAverage = (nums: number[], k: number) => {
   }
   return maxAvg / k;
 };
-console.log(findMaxAverage([1, 12, -5, -6, 50, 3], 4));
+
+// Input: prices = [7,1,5,3,6,4]
+// Output: 5
+// Input: prices = [7,6,4,3,1]
+// Output: 0
+export const maxProfit = (prices: number[]): number => {
+  let maxProfit = 0;
+  for (let i = 0; i < prices.length; i++) {
+    const currentVal = prices[i];
+    for (let j = i + 1; j < prices.length; j++) {
+      const iterativeValue = prices[j];
+      const currentProfit = Math.abs(currentVal - iterativeValue);
+      if (currentProfit > maxProfit && iterativeValue > currentVal) {
+        maxProfit = currentProfit;
+      }
+    }
+  }
+  return maxProfit;
+};
+
+export const betterMaxProfit = (prices: number[]): number => {
+  let minPrice = prices[0];
+  let maxProfit = 0;
+  for (let i = 0; i < prices.length; i++) {
+    if (prices[i] < minPrice) {
+      minPrice = prices[i];
+    }
+    const currentProfit = prices[i] - minPrice;
+    if (currentProfit > maxProfit) {
+      maxProfit = currentProfit;
+    }
+  }
+  return maxProfit;
+};
 // [1, 2, 3, 4, 5, 6, 7] arr.length = 7, 7 - k + 1 = 3
 // k = 3
 // [1, 2, 3]
+
+//check for repeats in the row / column - via an insertion inside a set and check each value
+// check for the current sub-box if there is a repeat too - also in the
+export const isValidSudoku = (board: string[][]): boolean => {
+  const rows = board;
+  for (let row of rows) {
+    const filteredRow = row.filter((num: string) => num !== ".");
+    if (new Set(filteredRow).size !== filteredRow.length) return false;
+  }
+  const subBoxes: { [boxIndex: number]: string[] } = {};
+  for (let i = 0; i < 9; i++) {
+    let col: string[] = [];
+    for (let j = 0; j < 9; j++) {
+      const cell = board[j][i];
+      if (cell === ".") continue;
+      col.push(cell);
+
+      const boxIndex = 3 * Math.floor(i / 3) + Math.floor(j / 3);
+      if (!subBoxes[boxIndex]) {
+        subBoxes[boxIndex] = [cell];
+      } else {
+        if (subBoxes[boxIndex].find((num: string) => num === cell))
+          return false;
+        subBoxes[boxIndex].push(cell);
+      }
+    }
+    if (new Set(col).size !== col.length) return false;
+  }
+  return true;
+};
+
+export const isAnagram = (s: string, t: string) => {
+  let remainingLetters = s.split("");
+  for (let letter of t) {
+    const sIndex = remainingLetters.findIndex((l) => l === letter);
+    if (sIndex < 0) {
+      return false;
+    }
+
+    remainingLetters.splice(sIndex, 1);
+  }
+  return remainingLetters.length === 0;
+};
