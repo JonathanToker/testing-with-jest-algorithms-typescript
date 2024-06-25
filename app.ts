@@ -239,3 +239,39 @@ export const mostEfficientIsAnagram = (s: string, t: string): boolean => {
   }
   return sCharCountMap.size === 0;
 };
+
+const isPalindrome = (s: string) => {
+  if (s.length < 2) return true;
+  const alphaNumericS = s.replace(/[^a-zA-Z0-9]/g, "").toLowerCase();
+  let reversedNumericS = "";
+  for (let i = alphaNumericS.length - 1; i >= 0; i--) {
+    reversedNumericS += alphaNumericS[i].toLowerCase();
+  }
+  console.log(reversedNumericS, alphaNumericS);
+  return reversedNumericS === alphaNumericS;
+};
+
+const isPalindromeTwoPointers = (s: string) => {
+  if (s.length < 2) return true;
+  let l = 0;
+  let r = s.length - 1;
+  const regex = /^[a-zA-Z0-9]+$/;
+  while (l < r) {
+    const leftChar = s[l];
+    const rightChar = s[r];
+    if (!regex.test(leftChar)) {
+      l++;
+      continue;
+    } else if (!regex.test(rightChar)) {
+      r--;
+      continue;
+    }
+    if (leftChar.toLowerCase() === rightChar.toLowerCase()) {
+      r--;
+      l++;
+    } else return false;
+  }
+  return true;
+};
+//console.log(isPalindrome("A man, a plan, a canal: Panama"));
+console.log(isPalindromeTwoPointers("A man, a plan, a canal: Panama"));
